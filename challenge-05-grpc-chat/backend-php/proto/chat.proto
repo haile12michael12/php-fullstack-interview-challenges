@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package chat;
+
+// Chat service definition
+service ChatService {
+  // Stream for receiving messages
+  rpc JoinChat(JoinRequest) returns (stream ChatMessage);
+  
+  // Send a message to the chat
+  rpc SendMessage(ChatMessage) returns (SendResponse);
+  
+  // Get user presence information
+  rpc GetOnlineUsers(Empty) returns (UserList);
+  
+  // Get chat history
+  rpc GetChatHistory(HistoryRequest) returns (ChatHistory);
+}
+
+// Empty message for requests that don't need parameters
+message Empty {}
+
+// Request to join the chat
+message JoinRequest {
+  string user_id = 1;
+  string username = 2;
+}
+
+// Chat message format
+message ChatMessage {
+  string id = 1;
+  string user_id = 2;
+  string username = 3;
+  string content = 4;
+  int64 timestamp = 5;
+  MessageType type = 6;
+  
+  enum MessageType {
+    TEXT = 0;
+    JOIN = 1;
+    LEAVE = 2;
+    SYSTEM = 3;
+  }
+}
+
+// Response after sending a message
+message SendResponse {
+  bool success = 1;
+  string message_id = 2;
+  string error = 3;
+}
+
+// User information
+message UserInfo {
+  string user_id = 1;
+  string username = 2;
+  int64 last_active = 3;
+}
+
+// List of online users
+message UserList {
+  repeated UserInfo users = 1;
+}
+
+// Request for chat history
+message HistoryRequest {
+  int32 limit = 1;
+  int64 before_timestamp = 2;
+}
+
+// Chat history response
+message ChatHistory {
+  repeated ChatMessage messages = 1;
+  bool has_more = 2;
+}
