@@ -19,6 +19,8 @@
         "ext-mbstring": "*",
         "ext-fileinfo": "*",
         "ext-zip": "*",
+        "ext-memcached": "*",
+        "ext-redis": "*",
         "monolog/monolog": "^3.0",
         "psr/log": "^3.0",
         "psr/http-message": "^2.0",
