@@ -2,52 +2,21 @@
 
 declare(strict_types=1);
 
-use Spiral\RoadRunner\GRPC\Server;
-use Spiral\RoadRunner\Worker;
+use Spiral\GRPC\Server;
 use Challenge01\EchoService;
-use SharedBackend\Core\Container;
-use SharedBackend\Core\Config;
-use SharedBackend\Core\Logger;
-use SharedBackend\Core\Cache;
-use SharedBackend\Core\EventDispatcher;
+use Echo\EchoServiceInterface;
 
 // Include Composer autoloader
 require_once __DIR__ . '/vendor/autoload.php';
 
-// Include shared backend
-require_once __DIR__ . '/../shared-backend/vendor/autoload.php';
+// Create new GRPC server
+$server = new Server();
 
-// Include generated proto files (you'll need to generate these)
-// require_once __DIR__ . '/proto/Echo/EchoServiceInterface.php';
-// require_once __DIR__ . '/proto/Echo/EchoRequest.php';
-// require_once __DIR__ . '/proto/Echo/EchoResponse.php';
-// require_once __DIR__ . '/proto/Echo/StatsRequest.php';
-// require_once __DIR__ . '/proto/Echo/StatsResponse.php';
-// require_once __DIR__ . '/proto/Echo/HealthRequest.php';
-// require_once __DIR__ . '/proto/Echo/HealthResponse.php';
+// Register our EchoService
+$server->registerService(EchoServiceInterface::class, new EchoService());
 
-/**
- * Advanced gRPC Echo Server with RoadRunner
- */
-class EchoServer
-{
-    private Container $container;
-    private Config $config;
-    private Logger $logger;
-    private Server $grpcServer;
-    private Worker $worker;
-
-    public function __construct()
-    {
-        $this->initializeContainer();
-        $this->initializeServices();
-        $this->initializeGrpcServer();
-    }
-
-    public function start(): void
-    {
-        $this->logger->info('Starting gRPC Echo Server', [
-            'version' => '1.0.0',
+// Start the server
+$server->serve('0.0.0.0:50051');
             'environment' => $this->config->get('app.env', 'production'),
             'debug' => $this->config->get('app.debug', false)
         ]);

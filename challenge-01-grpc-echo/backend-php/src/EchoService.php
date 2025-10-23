@@ -6,27 +6,20 @@ namespace Challenge01;
 
 use Spiral\GRPC\ContextInterface;
 use Spiral\GRPC\ServiceInterface;
-use Proto\EchoServiceInterface;
-use Proto\EchoRequest;
-use Proto\EchoResponse;
-use Proto\StatsRequest;
-use Proto\StatsResponse;
-use Proto\HealthRequest;
-use Proto\HealthResponse;
-use Proto\Status;
-use SharedBackend\Core\Logger;
-use SharedBackend\Core\Cache;
-use SharedBackend\Core\EventDispatcher;
+use Echo\EchoServiceInterface;
+use Echo\EchoRequest;
+use Echo\EchoResponse;
+use Echo\StatsRequest;
+use Echo\StatsResponse;
+use Echo\HealthRequest;
+use Echo\HealthResponse;
 
 /**
- * Advanced gRPC Echo Service with metrics, streaming, and health checks
+ * Simple gRPC Echo Service
  */
 class EchoService implements ServiceInterface, EchoServiceInterface
 {
-    private Logger $logger;
-    private Cache $cache;
-    private EventDispatcher $eventDispatcher;
-    private array $stats = [
+    private $stats = [
         'total_requests' => 0,
         'total_processing_time' => 0,
         'start_time' => 0,
@@ -34,17 +27,97 @@ class EchoService implements ServiceInterface, EchoServiceInterface
         'recent_messages' => []
     ];
 
-    public function __construct(Logger $logger, Cache $cache, EventDispatcher $eventDispatcher)
+    public function __construct()
     {
-        $this->logger = $logger;
-        $this->cache = $cache;
-        $this->eventDispatcher = $eventDispatcher;
         $this->stats['start_time'] = time();
     }
-
+    
+    /**
+     * Echo method that returns the received message
+     */
     public function Echo(ContextInterface $ctx, EchoRequest $in): EchoResponse
     {
         $startTime = microtime(true);
+        
+        // Log the request
+        error_log('Echo request received: ' . $in->getMessage());
+        
+        // Create response
+        $response = new EchoResponse();
+        $response->setMessage($in->getMessage());
+        $response->setOriginalMessage($in->getMessage());
+        $response->setTimestamp(time());
+        $response->setProcessingTimeMs((int)((microtime(true) - $startTime) * 1000));
+        
+        // Update stats
+        $this->stats['total_requests']++;
+        $this->stats['total_processing_time'] += $response->getProcessingTimeMs();
+        
+        $hour = date('Y-m-d H');
+        if (!isset($this->stats['request_counts_by_hour'][$hour])) {
+            $this->stats['request_counts_by_hour'][$hour] = 0;
+        }
+        $this->stats['request_counts_by_hour'][$hour]++;
+        
+        // Add to recent messages
+        array_unshift($this->stats['recent_messages'], $in->getMessage());
+        if (count($this->stats['recent_messages']) > 10) {
+            array_pop($this->stats['recent_messages']);
+        }
+        
+        return $response;
+    }
+    
+    /**
+     * Stream Echo method implementation
+     */
+    public function StreamEcho(ContextInterface $ctx): \Generator
+    {
+        while ($ctx->getStatus()->code === 0) {
+            $in = yield;
+            if ($in === null) {
+                return;
+            }
+            
+            $response = new EchoResponse();
+            $response->setMessage($in->getMessage());
+            $response->setOriginalMessage($in->getMessage());
+            $response->setTimestamp(time());
+            
+            yield $response;
+        }
+    }
+    
+    /**
+     * Get stats method implementation
+     */
+    public function GetStats(ContextInterface $ctx, StatsRequest $in): StatsResponse
+    {
+        $response = new StatsResponse();
+        $response->setTotalRequests($this->stats['total_requests']);
+        
+        if ($this->stats['total_requests'] > 0) {
+            $response->setAverageProcessingTimeMs($this->stats['total_processing_time'] / $this->stats['total_requests']);
+        } else {
+            $response->setAverageProcessingTimeMs(0);
+        }
+        
+        $response->setUptimeSeconds(time() - $this->stats['start_time']);
+        
+        return $response;
+    }
+    
+    /**
+     * Health check method implementation
+     */
+    public function HealthCheck(ContextInterface $ctx, HealthRequest $in): HealthResponse
+    {
+        $response = new HealthResponse();
+        $response->setStatus(1); // SERVING
+        
+        return $response;
+    }
+}
         
         $this->logger->info('Echo request received', [
             'message' => $in->getMessage(),
