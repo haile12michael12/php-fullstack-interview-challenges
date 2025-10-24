@@ -143,9 +143,15 @@
 78. **Challenge 92: WebSockets Server** - Build a WebSocket server for real-time communication
 79. **Challenge 93: Server-Sent Events** - Implement SSE for one-way real-time updates
 80. **Challenge 94: PHP Internals** - Modify PHP source code to add a custom opcode
+81. **Challenge 95: Just-In-Time Compilation** - Implement JIT optimization techniques for PHP code
+82. **Challenge 96: Extension Development Advanced** - Create complex PHP extensions with thread safety
+83. **Challenge 97: Memory Management Deep Dive** - Implement custom memory allocators for PHP
+84. **Challenge 98: Performance Profiling Tools** - Build advanced profiling tools for PHP applications
+85. **Challenge 99: Security Hardening** - Implement advanced security measures for PHP applications
+86. **Challenge 100: Distributed Systems Patterns** - Implement distributed computing patterns in PHP
 
 ---
-*Total Challenges: 80*
+*Total Challenges: 100*
 
 Each challenge will include:
 - Detailed README with description, requirements, and learning objectives

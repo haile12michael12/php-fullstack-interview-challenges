@@ -136,8 +136,17 @@ This path is designed for experienced developers (3+ years) looking to master ar
 78. Challenge 92: WebSockets Server
 79. Challenge 93: Server-Sent Events
 80. Challenge 94: PHP Internals
+81. Challenge 95: Just-In-Time Compilation
+82. Challenge 96: Extension Development Advanced
+83. Challenge 97: Memory Management Deep Dive
+84. Challenge 98: Performance Profiling Tools
+85. Challenge 99: Security Hardening
+86. Challenge 100: Distributed Systems Patterns
 
 **Learning Outcomes**:
 - Master infrastructure and deployment
 - Implement advanced architectural patterns
 - Understand system-level programming
+- Optimize performance at the lowest levels
+- Secure applications against advanced threats
+- Build scalable distributed systems

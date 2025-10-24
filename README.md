@@ -1,6 +1,6 @@
-# 80 PHP Developer Challenges for Intermediate and Senior Developers
+# 100 PHP Developer Challenges for Intermediate and Senior Developers
 
-This repository contains 80 comprehensive PHP challenges designed to help developers advance from intermediate to senior level proficiency. Each challenge includes backend PHP implementation, frontend React interface, Docker configuration, and detailed documentation.
+This repository contains 100 comprehensive PHP challenges designed to help developers advance from intermediate to senior level proficiency. Each challenge includes backend PHP implementation, frontend React interface, Docker configuration, and detailed documentation.
 
 ## Overview
 
