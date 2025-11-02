@@ -1,0 +1,6 @@
+# Placeholder roadrunner config (optional)
+rpc:
+  listen: tcp://0.0.0.0:6001
+
+http:
+  address: 0.0.0.0:8088

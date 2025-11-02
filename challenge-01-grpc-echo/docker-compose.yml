@@ -1,39 +1,30 @@
-version: '3'
-
+version: "3.8"
 services:
-  backend:
+  php:
     build:
-      context: ./backend-php
+      context: ./backend
+      dockerfile: docker/php.Dockerfile
     ports:
       - "50051:50051"
     volumes:
-      - ./backend-php:/var/www/app
-    networks:
-      - app-network
+      - ./backend:/var/www
+    depends_on:
+      - envoy
 
   envoy:
-    image: envoyproxy/envoy:v1.22.0
+    image: envoyproxy/envoy:v1.26-latest
+    volumes:
+      - ./backend/docker/envoy.yaml:/etc/envoy/envoy.yaml
     ports:
       - "8080:8080"
-    volumes:
-      - ./envoy.yaml:/etc/envoy/envoy.yaml
-    networks:
-      - app-network
+    depends_on:
+      - php
 
   frontend:
     build:
-      context: ./frontend-react
+      context: ./frontend
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend-react:/app
-      - /app/node_modules
-    depends_on:
-      - backend
-      - envoy
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+      - ./frontend:/app
+    command: ["npm", "run", "dev"]

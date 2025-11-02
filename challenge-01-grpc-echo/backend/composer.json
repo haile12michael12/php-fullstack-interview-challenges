@@ -1,0 +1,11 @@
+{
+  "name": "php-react-grpc-echo/backend",
+  "require": {
+    "php": ">=7.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  }
+}
