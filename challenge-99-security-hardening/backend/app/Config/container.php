@@ -7,8 +7,8 @@ use SharedBackend\Cache\CacheManager;
 use SharedBackend\Auth\TokenManager;
 use SharedBackend\Storage\FileStorage;
 use SharedBackend\Storage\StorageInterface;
-use App\Controller\ApiController;
-use App\Controller\ControllerResolver;
+use App\Presentation\ApiController;
+use App\Presentation\ControllerResolver;
 
 return [
     // Core services

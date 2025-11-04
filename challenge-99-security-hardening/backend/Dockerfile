@@ -32,7 +32,7 @@ RUN composer install
 EXPOSE 80
 
 # Use the default production configuration
-RUN cp /var/www/public/.htaccess /var/www/.htaccess
+RUN cp /var/www/public/.htaccess /var/www/.htaccess || true
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www

@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend-php
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8000:80"
@@ -17,14 +17,14 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     volumes:
-      - ./backend-php:/var/www
+      - ./backend:/var/www
     depends_on:
       - mysql
       - redis
 
   frontend:
     build:
-      context: ./frontend-react
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:80"

@@ -4,11 +4,10 @@ namespace App;
 
 use DI\ContainerBuilder;
 use SharedBackend\Core\Config;
-use SharedBackend\Core\Container;
 use SharedBackend\Core\Logger;
-use SharedBackend\Http\Request;
-use SharedBackend\Http\Response;
-use App\Controller\ControllerResolver;
+use App\Infrastructure\Request;
+use App\Infrastructure\Response;
+use App\Presentation\ControllerResolver;
 
 class Application
 {

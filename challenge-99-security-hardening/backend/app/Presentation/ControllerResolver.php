@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Presentation;
 
 use SharedBackend\Core\Config;
-use SharedBackend\Http\Request;
 
 class ControllerResolver
 {
@@ -19,10 +18,10 @@ class ControllerResolver
     /**
      * Resolve a controller and action from a request
      * 
-     * @param Request $request
+     * @param \App\Http\Request $request
      * @return array|null ['controller' => string, 'action' => string, 'params' => array]
      */
-    public function resolve(Request $request): ?array
+    public function resolve($request): ?array
     {
         $path = $request->getPath();
         $method = $request->getMethod();
