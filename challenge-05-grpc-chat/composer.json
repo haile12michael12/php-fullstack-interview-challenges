@@ -1,0 +1,23 @@
+{
+    "name": "challenge-05/grpc-chat",
+    "description": "Challenge 05: gRPC Chat Application",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "grpc/grpc": "^1.42",
+        "google/protobuf": "^3.21"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "scripts": {
+        "start": "php public/index.php",
+        "dev": "php public/index.php",
+        "grpc-server": "php server.php"
+    }
+}

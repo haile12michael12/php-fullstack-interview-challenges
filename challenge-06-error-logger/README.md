@@ -76,7 +76,7 @@ challenge-06-error-logger/
 │   ├── tests/
 │   ├── composer.json
 │   └── Dockerfile
-├── frontend-react/
+├── frontend-nextjs/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── LogDashboard.jsx

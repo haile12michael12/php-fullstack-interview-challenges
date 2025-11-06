@@ -1,143 +1,191 @@
-# Challenge 07: Image Processing and Manipulation
+# Image Processing Application
 
-## Description
-This challenge focuses on building an image processing system with various manipulation capabilities. You'll learn how to resize, crop, filter, and transform images, implement format conversion, create image optimization tools, and build a user-friendly interface for image editing. The challenge covers image processing algorithms, performance optimization, and creating efficient image manipulation workflows.
-
-## Learning Objectives
-- Implement core image processing algorithms
-- Handle various image formats (JPEG, PNG, GIF, WebP)
-- Optimize images for web delivery and performance
-- Create image filtering and transformation effects
-- Implement batch processing capabilities
-- Apply security best practices for image handling
-- Optimize memory usage for large images
-
-## Requirements
-- PHP 8.1+
-- Composer
-- Node.js 16+
-- GD Library or ImageMagick PHP extension
-- Understanding of image processing concepts
-- Knowledge of color spaces and pixel manipulation
-- Docker (optional, for containerized deployment)
-
-## Features to Implement
-1. **Basic Image Operations**
-   - Resize and scale images with quality preservation
-   - Crop and rotate images
-   - Flip and mirror transformations
-   - Format conversion between JPEG, PNG, GIF, WebP
-   - EXIF data handling and preservation
-   
-2. **Advanced Image Processing**
-   - Color adjustment and filtering (brightness, contrast, saturation)
-   - Blur, sharpen, and noise reduction filters
-   - Watermarking and overlay capabilities
-   - Thumbnail generation with aspect ratio maintenance
-   - Image compression and optimization
-   
-3. **Batch Processing**
-   - Bulk image processing workflows
-   - Progress tracking and status reporting
-   - Parallel processing for performance
-   - Preset configurations and templates
-   - Output directory organization
-   
-4. **User Interface**
-   - Drag-and-drop image upload
-   - Real-time preview of transformations
-   - Adjustment sliders and controls
-   - History and undo functionality
-   - Export and download options
+A full-stack image processing application with PHP backend and React frontend.
 
 ## Project Structure
+
 ```
 challenge-07-image-processing/
 ├── backend-php/
 │   ├── src/
+│   │   ├── Core/
+│   │   │   ├── Contracts/
+│   │   │   │   ├── ImageProcessorInterface.php
+│   │   │   │   ├── OptimizerInterface.php
+│   │   │   │   ├── FilterInterface.php
+│   │   │   │   └── BatchProcessorInterface.php
+│   │   │   ├── Traits/
+│   │   │   │   ├── FileValidationTrait.php
+│   │   │   │   └── ResponseTrait.php
+│   │   │   └── Helpers/
+│   │   │       ├── ImageUtils.php
+│   │   │       └── Logger.php
+│   │   │
 │   │   ├── Image/
 │   │   │   ├── ImageProcessor.php
-│   │   │   ├── ImageTransformer.php
 │   │   │   ├── ImageFilter.php
-│   │   │   └── ImageOptimizer.php
+│   │   │   ├── ImageOptimizer.php
+│   │   │   └── ImageTransformer.php
+│   │   │
 │   │   ├── Service/
 │   │   │   ├── BatchProcessor.php
-│   │   │   └── ImageService.php
-│   │   └── Exception/
-│   │       ├── ImageException.php
-│   │       └── ProcessingException.php
+│   │   │   ├── ImageService.php
+│   │   │   └── PresetManager.php
+│   │   │
+│   │   ├── Controller/
+│   │   │   ├── ImageController.php
+│   │   │   └── BatchController.php
+│   │   │
+│   │   ├── Exception/
+│   │   │   ├── ImageException.php
+│   │   │   ├── ProcessingException.php
+│   │   │   └── ValidationException.php
+│   │   │
+│   │   ├── Config/
+│   │   │   ├── app.php
+│   │   │   ├── paths.php
+│   │   │   └── presets.php
+│   │   │
+│   │   └── bootstrap.php
+│   │
 │   ├── public/
-│   │   └── index.php
-│   ├── config/
+│   │   ├── index.php
+│   │   ├── uploads/
+│   │   ├── optimized/
+│   │   └── temp/
+│   │
 │   ├── tests/
+│   │   ├── ImageProcessorTest.php
+│   │   ├── ImageFilterTest.php
+│   │   └── BatchProcessorTest.php
+│   │
 │   ├── composer.json
-│   └── Dockerfile
+│   ├── phpunit.xml
+│   ├── Dockerfile
+│   ├── .env.example
+│   └── README.md
+│
 ├── frontend-react/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── ImageEditor.jsx
 │   │   │   ├── Canvas.jsx
 │   │   │   ├── Toolbar.jsx
-│   │   │   └── PreviewPanel.jsx
+│   │   │   ├── PreviewPanel.jsx
+│   │   │   ├── BatchUploader.jsx
+│   │   │   └── WatermarkTool.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── index.jsx
+│   │   │   ├── Batch.jsx
+│   │   │   └── Optimize.jsx
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useImageEditor.js
+│   │   │   └── useBatchProcessing.js
+│   │   │
+│   │   ├── context/
+│   │   │   └── EditorContext.jsx
+│   │   │
 │   │   ├── services/
 │   │   │   └── imageService.js
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── fileUtils.js
+│   │   │   ├── filters.js
+│   │   │   └── constants.js
+│   │   │
 │   │   ├── App.jsx
 │   │   └── main.jsx
+│   │
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   └── logo.png
+│   │
 │   ├── package.json
 │   ├── vite.config.js
-│   └── Dockerfile
+│   ├── Dockerfile
+│   └── README.md
+│
 ├── docker-compose.yml
+├── .gitignore
 └── README.md
 ```
 
-## Setup Instructions
+## Features
+
+- Image upload and processing
+- Batch processing capabilities
+- Filter application (brightness, contrast, saturation, etc.)
+- Image optimization and compression
+- Preset management for common operations
+- Responsive React frontend with real-time preview
+- RESTful API backend with PHP
+- Docker containerization for easy deployment
+
+## Getting Started
 
 ### Prerequisites
+
+- Docker and Docker Compose
 - PHP 8.1+
-- Composer
 - Node.js 16+
-- GD Library or ImageMagick PHP extension
-- Docker (optional)
+- Composer
 
-### Backend Setup
+### Installation
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Run `docker-compose up` to start the application
+
+### Backend API
+
+The backend API is available at `http://localhost:8000`
+
+### Frontend Application
+
+The frontend application is available at `http://localhost:3000`
+
+## Development
+
+### Backend Development
+
 1. Navigate to the `backend-php` directory
-2. Run `composer install` to install dependencies
-3. Start the development server:
-   ```bash
-   php public/index.php
-   ```
+2. Install dependencies: `composer install`
+3. Start the development server
 
-### Frontend Setup
+### Frontend Development
+
 1. Navigate to the `frontend-react` directory
-2. Run `npm install` to install dependencies
-3. Run `npm run dev` to start the development server
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
 
-### Docker Setup
-1. From the challenge root directory, run:
-   ```bash
-   docker-compose up -d
-   ```
-2. Access the application at `http://localhost:3000`
+## Testing
 
-## API Endpoints
-- `POST /api/image/process` - Process image with specified transformations
-- `POST /api/image/batch` - Process multiple images with same settings
-- `GET /api/image/formats` - Get supported image formats
-- `POST /api/image/optimize` - Optimize image for web delivery
-- `GET /api/image/presets` - Get available processing presets
-- `POST /api/image/watermark` - Add watermark to image
+### Backend Testing
 
-## Evaluation Criteria
-- [ ] Effective image processing algorithms implementation
-- [ ] Support for multiple image formats
-- [ ] Performance optimization for large images
-- [ ] User-friendly interface with real-time preview
-- [ ] Batch processing capabilities
-- [ ] Code quality and documentation
-- [ ] Test coverage for image processing functions
+Run PHPUnit tests:
+```bash
+cd backend-php
+./vendor/bin/phpunit
+```
 
-## Resources
-- [PHP GD Library](https://www.php.net/manual/en/book.image.php)
-- [ImageMagick PHP Extension](https://www.php.net/manual/en/book.imagick.php)
-- [Image Processing Algorithms](https://en.wikipedia.org/wiki/Digital_image_processing)
-- [WebP Image Format](https://developers.google.com/speed/webp)
+### Frontend Testing
+
+Run frontend tests:
+```bash
+cd frontend-react
+npm test
+```
+
+## Deployment
+
+The application can be deployed using Docker Compose:
+
+```bash
+docker-compose up -d
+```
+
+## License
+
+This project is licensed under the MIT License.

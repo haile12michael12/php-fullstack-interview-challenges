@@ -1,0 +1,31 @@
+# Backend PHP
+/backend-php/vendor/
+/backend-php/.env
+/backend-php/logs/
+/backend-php/public/uploads/
+/backend-php/public/optimized/
+/backend-php/public/temp/
+/backend-php/.phpunit.cache/
+/backend-php/composer.lock
+
+# Frontend React
+/frontend-react/node_modules/
+/frontend-react/dist/
+/frontend-react/.vite/
+/frontend-react/.env
+/frontend-react/.env.local
+/frontend-react/.env.development.local
+/frontend-react/.env.test.local
+/frontend-react/.env.production.local
+
+# Docker
+.dockerignore
+.env
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
