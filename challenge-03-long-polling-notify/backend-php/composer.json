@@ -1,0 +1,19 @@
+{
+    "name": "challenge-03/long-polling-notify",
+    "description": "Challenge 03: Long Polling Notification System",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Challenge03\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php public/index.php",
+        "dev": "php public/index.php"
+    }
+}

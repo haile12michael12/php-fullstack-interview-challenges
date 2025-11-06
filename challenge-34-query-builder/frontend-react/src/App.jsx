@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './App.css'
+import QueryBuilder from './components/QueryBuilder'
+import QueryResults from './components/QueryResults'
+import QueryService from './services/queryService'
 
 function App() {
-  const [users, setUsers] = useState([])
+  const [results, setResults] = useState(null)
+  const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    fetchUsers()
-  }, [])
-
-  const fetchUsers = async () => {
+  const handleQuerySubmit = async (queryData) => {
     setLoading(true)
     setError(null)
+    setResults(null)
+    
     try {
-      // In a real application, this would be your API endpoint
-      const response = await fetch('/api/users')
-      if (!response.ok) {
-        throw new Error('Failed to fetch users')
-      }
-      const data = await response.json()
-      setUsers(data.data || [])
+      const response = await QueryService.executeQuery(queryData)
+      setResults(response.data || response.results || [])
+      setQuery(response.query || '')
     } catch (err) {
       setError(err.message)
     } finally {
@@ -31,23 +29,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>PHP Challenge - React Frontend</h1>
+        <h1>Query Builder</h1>
       </header>
       <main>
         <section>
-          <h2>Users</h2>
-          {loading && <p>Loading...</p>}
-          {error && <p className="error">Error: {error}</p>}
-          <ul>
-            {users.map(user => (
-              <li key={user.id}>
-                {user.name} ({user.email})
-              </li>
-            ))}
-          </ul>
-          <button onClick={fetchUsers} disabled={loading}>
-            Refresh Users
-          </button>
+          <QueryBuilder onQuerySubmit={handleQuerySubmit} />
+          <QueryResults 
+            results={results}
+            query={query}
+            loading={loading}
+            error={error}
+          />
         </section>
       </main>
     </div>

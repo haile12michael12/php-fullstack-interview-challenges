@@ -1,0 +1,20 @@
+{
+    "name": "challenge-04/file-upload-scan",
+    "description": "Challenge 04: File Upload with Security Scanning",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "ext-json": "*",
+        "ext-fileinfo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Challenge04\\": "src/"
+        }
+    },
+    "scripts": {
+        "start": "php public/index.php",
+        "dev": "php public/index.php"
+    }
+}

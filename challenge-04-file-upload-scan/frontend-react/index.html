@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge 04: File Upload with Security Scanning</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      
+      .App {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      
+      .file-upload {
+        margin-bottom: 30px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      
+      .upload-form {
+        margin-top: 15px;
+      }
+      
+      .upload-form input[type="file"] {
+        margin-bottom: 15px;
+      }
+      
+      .file-info {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+      }
+      
+      .upload-form button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      .upload-form button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+      
+      .upload-form button:hover:not(:disabled) {
+        background-color: #0056b3;
+      }
+      
+      .error-message {
+        color: #f44336;
+        background-color: #ffebee;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 15px;
+      }
+      
+      .success-message {
+        color: #4caf50;
+        background-color: #e8f5e9;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 15px;
+      }
+      
+      .file-list-container {
+        margin-top: 30px;
+      }
+      
+      .file-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .file-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      
+      .file-info h3 {
+        margin-top: 0;
+      }
+      
+      .status-safe {
+        color: #4caf50;
+        font-weight: bold;
+      }
+      
+      .status-unsafe {
+        color: #f44336;
+        font-weight: bold;
+      }
+      
+      .file-actions {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .file-actions button {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      .file-actions button.delete-btn {
+        background-color: #f44336;
+        color: white;
+        border-color: #f44336;
+      }
+      
+      .no-files {
+        text-align: center;
+        color: #666;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

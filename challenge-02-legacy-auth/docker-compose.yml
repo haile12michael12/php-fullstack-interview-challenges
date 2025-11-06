@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend-php
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=challenge_02_auth
+      - DB_USER=root
+      - DB_PASS=secret
+      - JWT_SECRET=your_jwt_secret_here
+    depends_on:
+      - db
+    volumes:
+      - ./backend-php:/var/www/html
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=challenge_02_auth
+    volumes:
+      - db_data:/var/lib/mysql
+
+  frontend:
+    build:
+      context: ./frontend-react
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react:/app
+      - /app/node_modules
+
+volumes:
+  db_data:
