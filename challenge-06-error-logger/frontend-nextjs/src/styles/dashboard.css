@@ -1,0 +1,244 @@
+/* Dashboard specific styles */
+
+.log-dashboard {
+  padding: var(--spacing-md);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.dashboard-header h1 {
+  margin: 0;
+}
+
+.dashboard-content {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.left-panel {
+  flex: 1;
+  min-width: 300px;
+}
+
+.right-panel {
+  flex: 2;
+  min-width: 400px;
+}
+
+/* Filter bar styles */
+.filter-bar {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+
+.filter-group label {
+  font-weight: bold;
+  margin-bottom: var(--spacing-xs);
+}
+
+.filter-group select,
+.filter-group input {
+  padding: var(--spacing-sm);
+  border: 1px solid #ced4da;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+}
+
+/* Error list styles */
+.error-list h2 {
+  margin-top: 0;
+}
+
+.error-item {
+  margin-bottom: var(--spacing-sm);
+  transition: transform 0.2s;
+}
+
+.error-item:hover {
+  transform: translateY(-2px);
+}
+
+.error-item.error {
+  border-left: 4px solid var(--danger-color);
+}
+
+.error-item.warning {
+  border-left: 4px solid var(--warning-color);
+}
+
+.error-item.notice {
+  border-left: 4px solid var(--info-color);
+}
+
+.error-item.info {
+  border-left: 4px solid var(--primary-color);
+}
+
+.error-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+}
+
+.error-level {
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+}
+
+.error-timestamp {
+  font-size: var(--font-size-sm);
+  color: var(--secondary-color);
+}
+
+.error-message {
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.error-context {
+  font-size: var(--font-size-sm);
+  color: var(--secondary-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Log viewer styles */
+.log-viewer {
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--spacing-md);
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.log-header h2 {
+  margin: 0;
+}
+
+.log-details {
+  padding: var(--spacing-md);
+}
+
+.log-field {
+  margin-bottom: var(--spacing-md);
+}
+
+.log-field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: var(--spacing-xs);
+}
+
+.log-field span {
+  display: block;
+  padding: var(--spacing-sm);
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  word-break: break-all;
+}
+
+.log-context {
+  background-color: #f8f9fa;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+.level-error {
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+.level-warning {
+  color: var(--warning-color);
+  font-weight: bold;
+}
+
+.level-info {
+  color: var(--info-color);
+  font-weight: bold;
+}
+
+/* Analytics panel styles */
+.analytics-panel h2 {
+  margin-top: 0;
+}
+
+.analytics-cards {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.analytics-card {
+  flex: 1;
+  text-align: center;
+  padding: var(--spacing-lg);
+}
+
+.analytics-card h3 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+.metric {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.chart {
+  margin-top: var(--spacing-md);
+}
+
+.chart-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dashboard-content {
+    flex-direction: column;
+  }
+  
+  .filter-bar {
+    flex-direction: column;
+  }
+  
+  .filter-group {
+    width: 100%;
+  }
+  
+  .analytics-cards {
+    flex-direction: column;
+  }
+}
