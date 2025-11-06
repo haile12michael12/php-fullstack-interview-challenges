@@ -1,0 +1,29 @@
+# Backend PHP
+/backend-php/vendor/
+/backend-php/.env
+/backend-php/logs/
+/backend-php/storage/
+/backend-php/.phpunit.cache/
+/backend-php/composer.lock
+
+# Frontend React
+/frontend-nextjs/node_modules/
+/frontend-nextjs/dist/
+/frontend-nextjs/.vite/
+/frontend-nextjs/.env
+/frontend-nextjs/.env.local
+/frontend-nextjs/.env.development.local
+/frontend-nextjs/.env.test.local
+/frontend-nextjs/.env.production.local
+
+# Docker
+.dockerignore
+.env
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,72 @@
+/* Theme-specific styles */
+
+/* Light theme (default) */
+.light {
+  --editor-text: #333333;
+  --preview-text: #333333;
+  --code-background: #f6f8fa;
+  --blockquote-border: #dfe2e5;
+}
+
+/* Dark theme */
+.dark {
+  --editor-text: #ffffff;
+  --preview-text: #ffffff;
+  --code-background: #2d2d2d;
+  --blockquote-border: #444444;
+}
+
+/* Editor specific styles */
+.editor.light {
+  color: var(--editor-text);
+}
+
+.editor.dark {
+  color: var(--editor-text);
+}
+
+/* Preview specific styles */
+.preview-content.light {
+  color: var(--preview-text);
+}
+
+.preview-content.dark {
+  color: var(--preview-text);
+}
+
+/* Syntax highlighting */
+.comment {
+  color: #6a737d;
+}
+
+.string {
+  color: #032f62;
+}
+
+.keyword {
+  color: #d73a49;
+}
+
+.tag {
+  color: #22863a;
+}
+
+/* Code blocks */
+pre {
+  background-color: var(--code-background);
+  padding: 16px;
+  overflow: auto;
+  border-radius: 6px;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Blockquotes */
+blockquote {
+  margin: 0;
+  padding: 0 1em;
+  border-left: 0.25em solid var(--blockquote-border);
+  color: #6a737d;
+}
