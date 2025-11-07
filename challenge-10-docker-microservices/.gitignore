@@ -1,0 +1,42 @@
+# .gitignore for Docker Microservices Challenge
+
+# Ignore vendor directories
+vendor/
+**/vendor/
+
+# Ignore environment files
+.env
+.env.local
+**/.env
+**/.env.local
+
+# Ignore logs
+logs/
+*.log
+**/logs/
+**/*.log
+
+# Ignore temporary files
+tmp/
+temp/
+**/tmp/
+**/temp/
+
+# Ignore IDE files
+.vscode/
+.idea/
+**/.vscode/
+**/.idea/
+*.swp
+*.swo
+
+# Ignore Docker files
+.dockerignore
+
+# Ignore Composer lock files
+composer.lock
+**/composer.lock
+
+# Ignore system files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,34 @@
+{
+    "routes": [
+        {
+            "path": "/users",
+            "service": "user-service",
+            "methods": ["GET", "POST"]
+        },
+        {
+            "path": "/users/{id}",
+            "service": "user-service",
+            "methods": ["GET", "PUT", "DELETE"]
+        },
+        {
+            "path": "/products",
+            "service": "product-service",
+            "methods": ["GET", "POST"]
+        },
+        {
+            "path": "/products/{id}",
+            "service": "product-service",
+            "methods": ["GET", "PUT", "DELETE"]
+        },
+        {
+            "path": "/orders",
+            "service": "order-service",
+            "methods": ["GET", "POST"]
+        },
+        {
+            "path": "/orders/{id}",
+            "service": "order-service",
+            "methods": ["GET", "PUT", "DELETE"]
+        }
+    ]
+}
