@@ -15,5 +15,34 @@ services:
       - "11211:11211"
     command: memcached -m 64
 
+  php:
+    build:
+      context: ./backend-php
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend-php:/var/www/html
+    depends_on:
+      - redis
+      - memcached
+    environment:
+      - REDIS_HOST=redis
+      - MEMCACHED_HOST=memcached
+
+  react:
+    build:
+      context: ./frontend-react
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react:/app
+      - /app/node_modules
+    depends_on:
+      - php
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080
+
 volumes:
   redis_data:

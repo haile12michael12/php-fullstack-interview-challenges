@@ -1,16 +1,8 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/bootstrap.php';
 
-use App\Application;
-use Symfony\Component\Dotenv\Dotenv;
-
-// Load environment variables
-$dotenv = new Dotenv();
-if (file_exists(__DIR__ . '/../.env')) {
-    $dotenv->load(__DIR__ . '/../.env');
-}
-
-// Create and run the application
-$app = new Application();
-$app->run();
+// Get router from bootstrap and dispatch request
+$router = require_once __DIR__ . '/../src/bootstrap.php';
+$router->dispatch();

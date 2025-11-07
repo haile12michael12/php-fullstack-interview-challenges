@@ -19,7 +19,6 @@
         "ext-redis": "*",
         "ext-memcached": "*",
         "monolog/monolog": "^3.0",
-        "symfony/dotenv": "^6.0",
         "php-di/php-di": "^7.0",
         "predis/predis": "^2.0"
     },
