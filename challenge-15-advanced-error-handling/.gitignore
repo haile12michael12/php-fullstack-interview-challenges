@@ -1,0 +1,64 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+log*.txt
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backend - PHP
+/backend-php/vendor/
+/backend-php/.env
+/backend-php/.env.*.local
+/backend-php/storage/cache/*
+!/backend-php/storage/cache/.gitkeep
+/backend-php/storage/logs/*
+!/backend-php/storage/logs/.gitkeep
+/backend-php/storage/sessions/*
+!/backend-php/storage/sessions/.gitkeep
+/backend-php/storage/views/*
+!/backend-php/storage/views/.gitkeep
+/backend-php/composer.phar
+/backend-php/composer.lock
+/backend-php/phpunit.xml
+/backend-php/.phpunit.result.cache
+/backend-php/.php_cs.cache
+
+# Frontend - React
+/frontend-react/node_modules/
+/frontend-react/build/
+/frontend-react/dist/
+/frontend-react/.env
+/frontend-react/.env.*.local
+/frontend-react/.cache/
+/frontend-react/.vite/
+/frontend-react/coverage/
+/frontend-react/.nyc_output/
+/frontend-react/.eslintcache
+
+# Docker
+*.env
+.dockerignore
+docker-compose.override.yml
+
+# IDE specific files
+nbproject/
+.netbeans/
+.netbeans_private/

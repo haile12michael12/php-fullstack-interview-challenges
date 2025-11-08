@@ -1,0 +1,61 @@
+name: Backend Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'backend-php/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'backend-php/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        php-version: [8.1, 8.2]
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: mbstring, xml, ctype, iconv, mysqli, pdo, pdo_mysql
+        coverage: xdebug
+        
+    - name: Validate composer.json and composer.lock
+      working-directory: ./backend-php
+      run: composer validate --strict
+      
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: backend-php/vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('backend-php/composer.lock') }}
+        
+    - name: Install dependencies
+      working-directory: ./backend-php
+      run: composer install --prefer-dist --no-progress
+      
+    - name: Run PHPStan
+      working-directory: ./backend-php
+      run: composer run-script phpstan
+      
+    - name: Run PHPUnit tests
+      working-directory: ./backend-php
+      run: |
+        cp .env.example .env
+        vendor/bin/phpunit --coverage-clover=coverage.xml
+        
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./backend-php/coverage.xml
+        flags: backend,php
+        name: backend-coverage

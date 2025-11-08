@@ -1,0 +1,48 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'frontend-react/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'frontend-react/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: frontend-react/package-lock.json
+        
+    - name: Install dependencies
+      working-directory: ./frontend-react
+      run: npm ci
+      
+    - name: Run ESLint
+      working-directory: ./frontend-react
+      run: npm run lint
+      
+    - name: Run tests
+      working-directory: ./frontend-react
+      run: npm run test:coverage
+      
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./frontend-react/coverage/lcov.info
+        flags: frontend,javascript
+        name: frontend-coverage
