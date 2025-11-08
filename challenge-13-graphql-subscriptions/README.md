@@ -80,12 +80,14 @@ challenge-13-graphql-subscriptions/
 │   │       ├── GraphQLException.php
 │   │       └── SubscriptionException.php
 │   ├── public/
-│   │   └── index.php
+│   │   ├── index.php
+│   │   └── websocket.php
 │   ├── config/
 │   ├── migrations/
 │   ├── tests/
 │   ├── composer.json
-│   └── Dockerfile
+│   ├── Dockerfile
+│   └── .env
 ├── frontend-react/
 │   ├── src/
 │   │   ├── components/
@@ -96,7 +98,10 @@ challenge-13-graphql-subscriptions/
 │   │   ├── services/
 │   │   │   └── graphqlService.js
 │   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── index.css
 │   │   └── main.jsx
+│   ├── index.html
 │   ├── package.json
 │   ├── vite.config.js
 │   └── Dockerfile
@@ -117,13 +122,13 @@ challenge-13-graphql-subscriptions/
 1. Navigate to the `backend-php` directory
 2. Run `composer install` to install dependencies
 3. Copy `.env.example` to `.env` and configure your database settings
-4. Run database migrations:
-   ```bash
-   php migrations/migrate.php
-   ```
-5. Start the GraphQL server:
+4. Start the GraphQL server:
    ```bash
    php public/index.php
+   ```
+5. Start the WebSocket server for subscriptions:
+   ```bash
+   php public/websocket.php
    ```
 
 ### Frontend Setup

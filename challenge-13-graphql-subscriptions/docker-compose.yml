@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # Backend GraphQL API
+  backend:
+    build:
+      context: ./backend-php
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - APP_ENV=development
+      - APP_DEBUG=true
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=challenge13
+      - DB_USER=root
+      - DB_PASS=secret
+    volumes:
+      - ./backend-php:/var/www
+    depends_on:
+      - mysql
+    command: php -S 0.0.0.0:8080 -t public
+
+  # WebSocket server for subscriptions
+  websocket:
+    build:
+      context: ./backend-php
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8081"
+    environment:
+      - APP_ENV=development
+    volumes:
+      - ./backend-php:/var/www
+    depends_on:
+      - mysql
+    command: php public/websocket.php
+
+  # Frontend React app
+  frontend:
+    build:
+      context: ./frontend-react
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend-react:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    command: npm run dev
+
+  # MySQL database
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=challenge13
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # Adminer for database management
+  adminer:
+    image: adminer
+    ports:
+      - "8083:8080"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:

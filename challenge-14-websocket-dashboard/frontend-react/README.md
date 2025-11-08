@@ -28,11 +28,13 @@ frontend-react/
 ├── src/
 │   ├── components/
 │   │   ├── Dashboard.jsx
-│   │   ├── MetricsPanel.jsx
+│   │   ├── MetricsChart.jsx
 │   │   ├── ConnectionStatus.jsx
-│   │   └── Chart.jsx
+│   │   └── ControlPanel.jsx
 │   ├── hooks/
 │   │   └── useWebSocket.js
+│   ├── services/
+│   │   └── dashboardService.js
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx

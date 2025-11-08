@@ -110,7 +110,7 @@ challenge-14-websocket-dashboard/
 3. Copy `.env.example` to `.env` and configure your settings
 4. Start the WebSocket server:
    ```bash
-   php public/index.php
+   php server.php
    ```
 
 ### Frontend Setup

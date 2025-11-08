@@ -26,17 +26,24 @@ This is the frontend React application for Challenge 13, which demonstrates Grap
 frontend-react/
 ├── src/
 │   ├── components/
+│   │   ├── PostList.jsx
+│   │   ├── PostForm.jsx
+│   │   ├── CommentSection.jsx
+│   │   └── RealTimeFeed.jsx
+│   ├── services/
+│   │   └── graphqlService.js
 │   ├── App.jsx
+│   ├── App.css
 │   ├── index.css
 │   └── main.jsx
 ├── index.html
 ├── package.json
 ├── vite.config.js
-└── eslint.config.js
+└── Dockerfile
 ```
 
 ## API Integration
-The frontend is configured to connect to the GraphQL server at `ws://localhost:8080/graphql` for subscriptions and `http://localhost:8080/graphql` for queries and mutations.
+The frontend is configured to connect to the GraphQL server at `ws://localhost:8081/graphql` for subscriptions and `http://localhost:8080/graphql` for queries and mutations.
 
 ## Development
 - Run `npm run dev` to start the development server
