@@ -1,0 +1,43 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build output
+/backend-php/dist/
+/frontend-react/dist/
+/frontend-react/build/
+
+# Docker
+.dockerignore
+
+# Profiling data
+/tmp/profiling/
+*.out.*
+
+# Composer
+composer.lock
+
+# NPM
+package-lock.json
+yarn.lock
+
+# Vite
+.vite/

@@ -62,8 +62,16 @@ challenge-17-memory-management/
 │   │   │   ├── Detector.php
 │   │   │   ├── Preventer.php
 │   │   │   └── Cleaner.php
-│   │   └── Utils/
-│   │       └── WeakReferenceManager.php
+│   │   ├── Utils/
+│   │   │   ├── WeakReferenceManager.php
+│   │   │   └── MemoryFormatter.php
+│   │   ├── Monitoring/
+│   │   │   ├── MemoryLogger.php
+│   │   │   ├── MemoryAlert.php
+│   │   │   └── ReportGenerator.php
+│   │   └── Api/
+│   │       ├── MemoryController.php
+│   │       └── Router.php
 │   ├── tests/
 │   ├── composer.json
 │   └── server.php
@@ -71,11 +79,33 @@ challenge-17-memory-management/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── MemoryProfiler.jsx
-│   │   │   └── PerformanceChart.jsx
-│   │   └── services/
-│   │       └── memoryService.js
+│   │   │   ├── PerformanceChart.jsx
+│   │   │   ├── RealTimeMonitor.jsx
+│   │   │   ├── MemoryLeakDetector.jsx
+│   │   │   ├── MemoryOptimizer.jsx
+│   │   │   └── AlertsPanel.jsx
+│   │   ├── context/
+│   │   │   └── MemoryContext.jsx
+│   │   ├── hooks/
+│   │   │   ├── useMemoryData.js
+│   │   │   ├── useInterval.js
+│   │   │   └── useAlerts.js
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx
+│   │   │   └── Trends.jsx
+│   │   ├── services/
+│   │   │   └── memoryService.js
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   ├── index.css
+│   │   └── vite-env.d.ts
 │   ├── package.json
 │   └── vite.config.js
+├── docs/
+│   ├── MEMORY_OPTIMIZATION_GUIDE.md
+│   ├── PROFILING_SETUP.md
+│   └── ARCHITECTURE_OVERVIEW.md
+├── docker-compose.yml
 └── README.md
 ```
 
