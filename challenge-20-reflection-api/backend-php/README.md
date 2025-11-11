@@ -1,20 +1,38 @@
-# Enhanced PHP Challenge Template
+# Challenge 20: Reflection API - Backend
 
-This is an enhanced template for PHP fullstack challenges with modern features and best practices.
+This backend demonstrates the power of PHP's Reflection API for building a dependency injection container and service locator.
 
 ## Features
 
+### Container System
+- ContainerInterface: Defines the contract for service containers
+- Container: Implementation of the service container with registration and retrieval
+- Service providers for modular service registration
+
+### Reflection-Based Resolution
+- ResolverInterface: Contract for class resolution
+- ReflectionResolver: Uses PHP Reflection API to automatically resolve class dependencies
+- Automatic parameter injection based on type hints
+
+### Service Factory
+- FactoryInterface: Contract for service creation
+- ServiceFactory: Creates instances of classes with dependency resolution
+- Circular dependency detection
+
+### Exception Handling
+- ContainerException: Base exception for container errors
+- NotFoundException: Thrown when a service is not found
+- CircularDependencyException: Thrown when circular dependencies are detected
+
+### Service Implementations
+- Logger implementations (FileLogger, DatabaseLogger)
+- Mailer implementation (SmtpMailer)
+- Service providers for modular registration
+
+### Additional Features
 - Modern PHP 8.1+ with strict typing
 - PSR-4 autoloading
-- Dependency Injection Container (PHP-DI)
-- Database abstraction with Doctrine DBAL
-- JWT authentication
 - Configuration management with environment variables
-- Logging with Monolog
-- HTTP request/response handling
-- Routing system
-- Caching with Redis
-- File storage abstraction
 - Testing framework (PHPUnit)
 - Static analysis (PHPStan)
 - Code quality tools (PHP_CodeSniffer, PHPMD)
@@ -50,7 +68,11 @@ backend-php/
 ├── config/           # Configuration files
 ├── public/           # Web root
 ├── src/              # Application source code
-│   ├── Controller/   # HTTP controllers
+│   ├── Container/    # Container system
+│   │   ├── Contracts/ # Container interfaces
+│   │   ├── Core/      # Container core implementations
+│   │   ├── Exception/ # Container exceptions
+│   │   └── Services/  # Service implementations
 │   ├── Http/         # HTTP utilities
 │   └── Application.php # Main application class
 ├── tests/            # Test files
@@ -72,17 +94,9 @@ backend-php/
 
 The application uses environment variables for configuration. Copy `.env.example` to `.env` and modify the values as needed.
 
-## Routing
+## API Endpoints
 
-Routes are defined in `config/config.php` under the `routes` key. The format is:
-```php
-'routes' => [
-    '/api/users' => [
-        'GET' => 'App\\Controller\\ApiController@getUsers',
-        'POST' => 'App\\Controller\\ApiController@createUser',
-    ],
-]
-```
+- `GET /api.php` - Initialize the reflection API and demonstrate service resolution
 
 ## Contributing
 

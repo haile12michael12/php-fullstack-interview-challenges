@@ -1,9 +1,15 @@
-# React Frontend Template
+# Challenge 20: Reflection API - Frontend
 
-This is a React frontend template for PHP fullstack challenges.
+This frontend demonstrates the power of PHP's Reflection API through interactive visualizations.
 
 ## Features
 
+### Components
+- ServiceContainer: Displays registered services
+- DependencyGraph: Visualizes service dependencies
+- ServiceInspector: Inspects service details using reflection
+
+### Additional Features
 - React 18 with hooks
 - Vite for fast development
 - ESLint for code quality
@@ -43,7 +49,6 @@ frontend-react/
 ├── public/           # Static assets
 ├── src/              # Source code
 │   ├── components/   # React components
-│   ├── services/     # API services
 │   ├── App.css       # App styles
 │   ├── App.jsx       # Main App component
 │   ├── index.css     # Global styles
@@ -56,7 +61,12 @@ frontend-react/
 
 ## Development
 
-The frontend is configured to proxy API requests to the backend server running on `http://localhost:8000`. Make sure the backend is running when developing.
+The frontend is configured to communicate with the backend server running on `http://localhost:8080`. Make sure the backend is running when developing.
+
+### Components
+- ServiceContainer: Displays registered services
+- DependencyGraph: Visualizes service dependencies
+- ServiceInspector: Inspects service details using reflection
 
 ## Building for Production
 

@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: traits_anonymous_test
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, pdo, pdo_mysql
+        coverage: none
+
+    - name: Validate composer.json and composer.lock
+      run: cd backend-php && composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: backend-php/vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('backend-php/composer.lock') }}
+
+    - name: Install dependencies
+      run: cd backend-php && composer install --prefer-dist --no-progress
+
+    - name: Run test suite
+      run: cd backend-php && ./vendor/bin/phpunit
+      env:
+        DB_HOST: 127.0.0.1
+        DB_NAME: traits_anonymous_test
+        DB_USER: root
+        DB_PASS: secret
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: 'npm'
+        cache-dependency-path: frontend-react/package-lock.json
+
+    - name: Install dependencies
+      run: cd frontend-react && npm ci
+
+    - name: Run linting
+      run: cd frontend-react && npm run lint
+
+    - name: Run tests
+      run: cd frontend-react && npm run test

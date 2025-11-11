@@ -59,7 +59,5 @@ return [
         'database' => 1,
     ],
     
-    'routes' => [
-        // Default routes will be defined in challenge-specific files
-    ],
+    'routes' => require __DIR__ . '/routes.php',
 ];

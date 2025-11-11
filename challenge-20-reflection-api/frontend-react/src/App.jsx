@@ -1,57 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import './App.css'
+import React from 'react';
+import ServiceContainer from './components/ServiceContainer';
+import DependencyGraph from './components/DependencyGraph';
+import ServiceInspector from './components/ServiceInspector';
+import './App.css';
 
 function App() {
-  const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    fetchUsers()
-  }, [])
-
-  const fetchUsers = async () => {
-    setLoading(true)
-    setError(null)
-    try {
-      // In a real application, this would be your API endpoint
-      const response = await fetch('/api/users')
-      if (!response.ok) {
-        throw new Error('Failed to fetch users')
-      }
-      const data = await response.json()
-      setUsers(data.data || [])
-    } catch (err) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
     <div className="App">
       <header className="App-header">
-        <h1>PHP Challenge - React Frontend</h1>
+        <h1>Reflection API Demo</h1>
+        <p>Exploring PHP Reflection API with Dependency Injection Container</p>
       </header>
       <main>
-        <section>
-          <h2>Users</h2>
-          {loading && <p>Loading...</p>}
-          {error && <p className="error">Error: {error}</p>}
-          <ul>
-            {users.map(user => (
-              <li key={user.id}>
-                {user.name} ({user.email})
-              </li>
-            ))}
-          </ul>
-          <button onClick={fetchUsers} disabled={loading}>
-            Refresh Users
-          </button>
+        <section className="demo-section">
+          <ServiceContainer />
+        </section>
+        <section className="demo-section">
+          <DependencyGraph />
+        </section>
+        <section className="demo-section">
+          <ServiceInspector />
         </section>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

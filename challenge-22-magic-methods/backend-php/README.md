@@ -1,89 +1,83 @@
-# Enhanced PHP Challenge Template
+# Challenge 22: Magic Methods - Backend
 
-This is an enhanced template for PHP fullstack challenges with modern features and best practices.
+This is the PHP backend for the Magic Methods challenge, demonstrating the power of PHP magic methods in building a full-stack application.
 
 ## Features
 
-- Modern PHP 8.1+ with strict typing
-- PSR-4 autoloading
-- Dependency Injection Container (PHP-DI)
-- Database abstraction with Doctrine DBAL
-- JWT authentication
-- Configuration management with environment variables
-- Logging with Monolog
-- HTTP request/response handling
-- Routing system
-- Caching with Redis
-- File storage abstraction
-- Testing framework (PHPUnit)
-- Static analysis (PHPStan)
-- Code quality tools (PHP_CodeSniffer, PHPMD)
+### ORM (Object-Relational Mapping)
+- Entity base class with magic property access (`__get`, `__set`, `__isset`, `__unset`)
+- Model class with dynamic query building (`__call`, `__callStatic`)
+- QueryBuilder with fluent interface
+- Relation handling
 
-## Requirements
+### Magic Classes
+- FluentInterface for method chaining (`__call`)
+- DynamicProxy for intercepting method calls (`__call`)
+- MethodInterceptor for aspect-oriented programming (`__call`)
 
-- PHP 8.1 or higher
-- Composer
-- MySQL/PostgreSQL/SQLite (for database challenges)
-- Redis (for caching challenges)
+### Database
+- Connection management (`__call`)
+- Schema builder (`__call`)
+- Migration system
 
-## Setup
+## Installation
 
-1. Clone the challenge directory
-2. Navigate to the `backend-php` directory
-3. Install dependencies:
-   ```bash
-   composer install
-   ```
-4. Copy the `.env.example` file to `.env` and configure your settings:
-   ```bash
-   cp .env.example .env
-   ```
-5. Start the development server:
-   ```bash
-   php -S localhost:8000 -t public
-   ```
-
-## Directory Structure
-
-```
-backend-php/
-├── config/           # Configuration files
-├── public/           # Web root
-├── src/              # Application source code
-│   ├── Controller/   # HTTP controllers
-│   ├── Http/         # HTTP utilities
-│   └── Application.php # Main application class
-├── tests/            # Test files
-├── vendor/           # Composer dependencies
-├── .env.example      # Environment variables template
-├── composer.json     # Composer configuration
-└── README.md         # This file
+```bash
+composer install
 ```
 
-## Available Scripts
+## Running Tests
 
-- `composer test` - Run PHPUnit tests
-- `composer phpstan` - Run static analysis
-- `composer cs` - Check code style
-- `composer cs-fix` - Fix code style issues
-- `composer phpmd` - Run PHP Mess Detector
-
-## Configuration
-
-The application uses environment variables for configuration. Copy `.env.example` to `.env` and modify the values as needed.
-
-## Routing
-
-Routes are defined in `config/config.php` under the `routes` key. The format is:
-```php
-'routes' => [
-    '/api/users' => [
-        'GET' => 'App\\Controller\\ApiController@getUsers',
-        'POST' => 'App\\Controller\\ApiController@createUser',
-    ],
-]
+```bash
+composer test
 ```
 
-## Contributing
+## API Endpoints
 
-This template is part of the PHP Fullstack Challenges project. For issues or improvements, please open a pull request.
+### Magic Methods
+- `GET /api/magic` - Magic methods overview
+- `GET /api/magic/fluent` - Fluent interface demo
+- `GET /api/magic/proxy` - Dynamic proxy demo
+- `GET /api/magic/interceptor` - Method interceptor demo
+
+### Entities
+- `GET /api/entities` - Entities overview
+- `GET /api/entities/users` - List all users
+- `GET /api/entities/users/{id}` - Get user by ID
+- `POST /api/entities/users` - Create new user
+- `PUT /api/entities/users/{id}` - Update user
+- `DELETE /api/entities/users/{id}` - Delete user
+
+### Query Builder
+- `GET /api/query` - Query builder overview
+- `GET /api/query/users` - Query users with filters
+- `GET /api/query/posts` - Query posts with filters
+- `POST /api/query/custom` - Execute custom query
+
+## Magic Methods Demonstrated
+
+1. **Construction and Destruction**
+   - `__construct()` - Object initialization
+   - `__destruct()` - Object cleanup
+
+2. **Property Access**
+   - `__get()` - Reading inaccessible properties
+   - `__set()` - Writing to inaccessible properties
+   - `__isset()` - Checking if properties are set
+   - `__unset()` - Unsetting properties
+
+3. **Method Calls**
+   - `__call()` - Calling inaccessible methods
+   - `__callStatic()` - Calling inaccessible static methods
+
+4. **Serialization**
+   - `__sleep()` - Preparing object for serialization
+   - `__wakeup()` - Restoring object from serialization
+
+5. **Object Representation**
+   - `__toString()` - Converting object to string
+   - `__invoke()` - Making object callable
+   - `__debugInfo()` - Custom debug information
+
+6. **Cloning**
+   - `__clone()` - Object cloning behavior

@@ -1,9 +1,26 @@
-# Enhanced PHP Challenge Template
+# Challenge 19: Traits and Anonymous Classes - Backend
 
-This is an enhanced template for PHP fullstack challenges with modern features and best practices.
+This backend demonstrates the power of PHP traits and anonymous classes for creating flexible and reusable code.
 
 ## Features
 
+### Traits
+- LoggerTrait: Provides logging functionality with different log levels
+- CacheableTrait: Implements caching with TTL support
+- ValidatableTrait: Adds data validation capabilities
+- SerializableTrait: Enables object serialization to JSON, XML, and other formats
+- TimestampableTrait: Manages creation and update timestamps
+
+### Anonymous Classes
+- Strategy implementations using anonymous classes
+- Mock objects for testing and demonstration
+- Factory patterns for creating anonymous class instances
+
+### Interfaces
+- StrategyInterface: Defines contract for strategy pattern implementations
+- CacheInterface: Standardizes cache operations
+
+### Additional Features
 - Modern PHP 8.1+ with strict typing
 - PSR-4 autoloading
 - Dependency Injection Container (PHP-DI)
@@ -49,9 +66,16 @@ This is an enhanced template for PHP fullstack challenges with modern features a
 backend-php/
 ├── config/           # Configuration files
 ├── public/           # Web root
+├── routes/           # Route definitions
 ├── src/              # Application source code
-│   ├── Controller/   # HTTP controllers
+│   ├── Traits/       # Reusable traits
+│   ├── Contracts/    # Interfaces and contracts
+│   ├── Factory/      # Factory classes for anonymous objects
+│   ├── Service/      # Business logic services
 │   ├── Http/         # HTTP utilities
+│   │   ├── Controller/ # HTTP controllers
+│   │   └── Middleware/ # HTTP middleware
+│   ├── Infrastructure/ # Infrastructure implementations
 │   └── Application.php # Main application class
 ├── tests/            # Test files
 ├── vendor/           # Composer dependencies
@@ -74,15 +98,22 @@ The application uses environment variables for configuration. Copy `.env.example
 
 ## Routing
 
-Routes are defined in `config/config.php` under the `routes` key. The format is:
+Routes are defined in `config/routes.php`. The format is:
 ```php
-'routes' => [
-    '/api/users' => [
-        'GET' => 'App\\Controller\\ApiController@getUsers',
-        'POST' => 'App\\Controller\\ApiController@createUser',
-    ],
+'/api/traits/logger' => [
+    'POST' => 'App\\Http\\Controller\\TraitController@logMessage',
 ]
 ```
+
+### Available API Endpoints
+- `GET /` - List available endpoints
+- `POST /api/traits/logger` - Log a message
+- `POST /api/traits/calculate` - Perform cached calculation
+- `POST /api/traits/validate` - Validate entity data
+- `POST /api/traits/cache` - Cache data
+- `GET /api/traits/cache/{key}` - Get cached data
+- `POST /api/traits/users` - Create a user
+- `GET /api/traits/stats` - Get system stats
 
 ## Contributing
 

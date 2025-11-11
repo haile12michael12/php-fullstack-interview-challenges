@@ -1,9 +1,23 @@
-# Enhanced PHP Challenge Template
+# Challenge 18: Generators and Iterators - Backend
 
-This is an enhanced template for PHP fullstack challenges with modern features and best practices.
+This backend demonstrates the power of PHP generators and iterators for efficient data processing.
 
 ## Features
 
+### Generators
+- CSV Processor: Efficiently process large CSV files
+- Database Iterator: Process database records in batches
+- File Streamer: Stream file contents in chunks
+- Data Pipeline: Chain operations using generators
+- Advanced Examples: Fibonacci, Primes, Directory traversal
+
+### Iterators
+- Custom Collection: Implements Iterator and Countable interfaces
+- Filter Iterator: Filter data using custom predicates
+- Map Iterator: Transform data using mapping functions
+- Infinite Sequence: Generate infinite sequences
+
+### Additional Features
 - Modern PHP 8.1+ with strict typing
 - PSR-4 autoloading
 - Dependency Injection Container (PHP-DI)
@@ -48,10 +62,15 @@ This is an enhanced template for PHP fullstack challenges with modern features a
 ```
 backend-php/
 ├── config/           # Configuration files
+├── data/             # Sample data files
 ├── public/           # Web root
+├── routes/           # Route definitions
 ├── src/              # Application source code
 │   ├── Controller/   # HTTP controllers
+│   ├── Generator/    # Generator implementations
 │   ├── Http/         # HTTP utilities
+│   ├── Iterator/     # Iterator implementations
+│   ├── Service/      # Business logic services
 │   └── Application.php # Main application class
 ├── tests/            # Test files
 ├── vendor/           # Composer dependencies
@@ -74,15 +93,20 @@ The application uses environment variables for configuration. Copy `.env.example
 
 ## Routing
 
-Routes are defined in `config/config.php` under the `routes` key. The format is:
+Routes are defined in `routes/web.php`. The format is:
 ```php
-'routes' => [
-    '/api/users' => [
-        'GET' => 'App\\Controller\\ApiController@getUsers',
-        'POST' => 'App\\Controller\\ApiController@createUser',
-    ],
+'/api/fibonacci/{limit}' => [
+    'GET' => 'App\\Controller\\GeneratorController@fibonacci',
 ]
 ```
+
+### Available API Endpoints
+- `GET /api/process/csv` - Process CSV data
+- `GET /api/process/file` - Process file stream
+- `GET /api/fibonacci/{limit}` - Generate Fibonacci sequence
+- `GET /api/primes/{limit}` - Generate prime numbers
+- `GET /api/stream` - Simulate data streaming
+
 
 ## Contributing
 

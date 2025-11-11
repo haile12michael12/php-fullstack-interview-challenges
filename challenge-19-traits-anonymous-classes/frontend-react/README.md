@@ -1,9 +1,20 @@
-# React Frontend Template
+# Challenge 19: Traits and Anonymous Classes - Frontend
 
-This is a React frontend template for PHP fullstack challenges.
+This frontend demonstrates the power of PHP traits and anonymous classes through interactive visualizations.
 
 ## Features
 
+### Components
+- TraitDemo: Interactive demonstration of trait functionality
+- AnonymousClassDemo: Showcase of anonymous class capabilities
+
+### Pages
+- Playground: Main page for experimenting with traits and anonymous classes
+
+### Services
+- oopService: API communication layer for backend operations
+
+### Additional Features
 - React 18 with hooks
 - Vite for fast development
 - ESLint for code quality
@@ -43,6 +54,7 @@ frontend-react/
 ├── public/           # Static assets
 ├── src/              # Source code
 │   ├── components/   # React components
+│   ├── pages/        # Page components
 │   ├── services/     # API services
 │   ├── App.css       # App styles
 │   ├── App.jsx       # Main App component
@@ -56,7 +68,10 @@ frontend-react/
 
 ## Development
 
-The frontend is configured to proxy API requests to the backend server running on `http://localhost:8000`. Make sure the backend is running when developing.
+The frontend is configured to communicate with the backend server running on `http://localhost:8080`. Make sure the backend is running when developing.
+
+### Pages
+- Playground: Main page for experimenting with traits and anonymous classes
 
 ## Building for Production
 

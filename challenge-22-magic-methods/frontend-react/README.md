@@ -1,79 +1,57 @@
-# React Frontend Template
+# Challenge 22: Magic Methods - Frontend
 
-This is a React frontend template for PHP fullstack challenges.
+This is the React frontend for the Magic Methods challenge, providing an interactive interface to explore PHP magic methods.
 
 ## Features
 
-- React 18 with hooks
-- Vite for fast development
-- ESLint for code quality
-- Testing with Vitest and React Testing Library
-- CSS modules for styling
-- Axios for HTTP requests
+### Interactive Demos
+- Magic Methods Demo - Explore fluent interfaces, dynamic proxies, and method interceptors
+- Entity Explorer - Work with ORM entities and magic methods
+- Query Builder - Build and execute dynamic queries
 
-## Requirements
+### Components
+- MagicMethodsDemo - Main demo interface
+- EntityExplorer - Entity management interface
+- QueryBuilder - Dynamic query building
+- DebugInfoCard - Data visualization component
 
-- Node.js 16 or higher
-- npm or yarn
+## Installation
 
-## Setup
-
-1. Navigate to the `frontend-react` directory
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run lint` - Run ESLint
-- `npm run preview` - Preview production build
-- `npm run test` - Run tests
-
-## Directory Structure
-
-```
-frontend-react/
-├── public/           # Static assets
-├── src/              # Source code
-│   ├── components/   # React components
-│   ├── services/     # API services
-│   ├── App.css       # App styles
-│   ├── App.jsx       # Main App component
-│   ├── index.css     # Global styles
-│   └── main.jsx      # Entry point
-├── index.html        # HTML template
-├── package.json      # NPM configuration
-├── vite.config.js    # Vite configuration
-└── README.md         # This file
+```bash
+npm install
 ```
 
 ## Development
 
-The frontend is configured to proxy API requests to the backend server running on `http://localhost:8000`. Make sure the backend is running when developing.
+```bash
+npm run dev
+```
 
 ## Building for Production
 
-To create a production build:
 ```bash
 npm run build
 ```
 
-The build output will be in the `dist` directory.
-
 ## Testing
 
-To run tests:
 ```bash
 npm run test
 ```
 
-## Contributing
+## Project Structure
 
-This template is part of the PHP Fullstack Challenges project. For issues or improvements, please open a pull request.
+```
+src/
+├── components/       # Reusable React components
+├── pages/           # Page components
+├── services/        # API service layer
+└── App.jsx          # Main application component
+```
+
+## Technologies Used
+
+- React 18
+- React Router 6
+- Vite
+- Axios

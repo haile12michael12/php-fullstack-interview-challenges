@@ -1,16 +1,16 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/Bootstrap/app.php';
 
-use App\Application;
-use Symfony\Component\Dotenv\Dotenv;
+// Handle CORS
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
-// Load environment variables
-$dotenv = new Dotenv();
-if (file_exists(__DIR__ . '/../.env')) {
-    $dotenv->load(__DIR__ . '/../.env');
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
 }
 
-// Create and run the application
-$app = new Application();
-$app->run();
+echo "Late Static Binding Challenge API";

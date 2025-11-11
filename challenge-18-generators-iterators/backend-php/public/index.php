@@ -6,11 +6,9 @@ use App\Application;
 use Symfony\Component\Dotenv\Dotenv;
 
 // Load environment variables
-$dotenv = new Dotenv();
-if (file_exists(__DIR__ . '/../.env')) {
-    $dotenv->load(__DIR__ . '/../.env');
-}
+$dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
-// Create and run the application
+// Initialize and run the application
 $app = new Application();
 $app->run();

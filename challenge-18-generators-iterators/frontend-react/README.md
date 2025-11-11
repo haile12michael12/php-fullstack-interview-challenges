@@ -1,9 +1,16 @@
-# React Frontend Template
+# Challenge 18: Generators and Iterators - Frontend
 
-This is a React frontend template for PHP fullstack challenges.
+This frontend demonstrates the power of PHP generators and iterators through interactive visualizations.
 
 ## Features
 
+### Data Visualization Components
+- Data Processor: Display processed CSV data
+- Performance Chart: Visualize generated sequences
+- Stream Viewer: Simulate data streaming
+- Iterator Demo: Interactive iterator demonstrations
+
+### Additional Features
 - React 18 with hooks
 - Vite for fast development
 - ESLint for code quality
@@ -43,6 +50,7 @@ frontend-react/
 ├── public/           # Static assets
 ├── src/              # Source code
 │   ├── components/   # React components
+│   ├── pages/        # Page components
 │   ├── services/     # API services
 │   ├── App.css       # App styles
 │   ├── App.jsx       # Main App component
@@ -56,7 +64,11 @@ frontend-react/
 
 ## Development
 
-The frontend is configured to proxy API requests to the backend server running on `http://localhost:8000`. Make sure the backend is running when developing.
+The frontend is configured to communicate with the backend server running on `http://localhost:8080`. Make sure the backend is running when developing.
+
+### Pages
+- Home Page: Data processing and performance visualization
+- Dashboard Page: Stream viewer and iterator demonstrations
 
 ## Building for Production
 

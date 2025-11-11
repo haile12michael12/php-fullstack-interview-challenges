@@ -6,58 +6,193 @@
   background-color: #282c34;
   padding: 20px;
   color: white;
+  margin-bottom: 30px;
 }
 
 .App-header h1 {
   margin: 0;
+  font-size: 2rem;
 }
 
-main {
+.App-header p {
+  margin: 10px 0 0 0;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.demo-section {
+  margin: 20px 0;
   padding: 20px;
-  max-width: 800px;
-  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-section {
-  margin-bottom: 30px;
-}
-
-ul {
+.service-container {
   text-align: left;
+}
+
+.services-list h3 {
+  margin-top: 0;
+}
+
+.service-item {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.service-name {
+  font-family: 'Courier New', monospace;
+  background-color: #e9ecef;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.dependency-graph {
+  text-align: left;
+}
+
+.dependency-form {
+  margin-bottom: 20px;
+}
+
+.dependency-form input {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.dependency-form button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dependency-group {
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.parent-service {
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #e9ecef;
+  border-radius: 3px;
+}
+
+.children-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.child-service {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 3px;
+}
+
+.child-service .remove-btn {
+  margin-left: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-inspector {
+  text-align: left;
+}
+
+.inspector-controls {
+  margin-bottom: 20px;
+}
+
+.inspector-controls select {
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.inspector-controls button {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.inspector-controls button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.inspection-result {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.result-section {
+  margin: 15px 0;
+}
+
+.result-section h4 {
+  margin: 0 0 10px 0;
+  color: #495057;
+}
+
+.result-section ul {
   list-style-type: none;
   padding: 0;
 }
 
-li {
-  padding: 10px;
-  margin: 5px 0;
-  background-color: #f5f5f5;
-  border-radius: 4px;
+.result-section li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
 }
 
-button {
-  background-color: #61dafb;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
+.visibility {
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-button:hover {
-  background-color: #21a9c7;
+.visibility.private {
+  background-color: #dc3545;
+  color: white;
 }
 
-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+.visibility.protected {
+  background-color: #ffc107;
+  color: black;
 }
 
-.error {
-  color: red;
+.visibility.public {
+  background-color: #28a745;
+  color: white;
 }

@@ -28,8 +28,8 @@ COPY . /var/www
 # Install PHP dependencies
 RUN composer install
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080
+EXPOSE 8080
 
 # Use the default production configuration
 RUN cp /var/www/public/.htaccess /var/www/.htaccess
