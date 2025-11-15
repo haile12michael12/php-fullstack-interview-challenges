@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use App\Boot\Container;
+use Symfony\Component\Console\Application;
+
+// Build the container
+$container = Container::build();
+
+// Create the application
+$application = new Application('Observer Pattern Console', '1.0.0');
+
+// Register commands
+$application->add($container->get(\App\Command\MigrateCommand::class));
+
+// Run the application
+$application->run();

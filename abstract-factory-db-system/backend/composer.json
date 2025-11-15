@@ -1,0 +1,22 @@
+{
+    "name": "abstract-factory/db-system",
+    "description": "Abstract Factory Database System",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core/",
+            "Interfaces\\": "src/Interfaces/",
+            "Factories\\": "src/Factories/",
+            "Drivers\\": "src/Drivers/",
+            "Services\\": "src/Services/",
+            "Controllers\\": "src/Controllers/"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    }
+}

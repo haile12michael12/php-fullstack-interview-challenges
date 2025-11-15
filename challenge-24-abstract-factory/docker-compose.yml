@@ -6,28 +6,25 @@ services:
       context: ./backend-php
       dockerfile: Dockerfile
     ports:
-      - "8000:80"
+      - "8000:8000"
     environment:
       - APP_ENV=local
       - DB_HOST=mysql
       - DB_PORT=3306
-      - DB_DATABASE=challenge_db
+      - DB_DATABASE=abstract_factory
       - DB_USERNAME=root
       - DB_PASSWORD=secret
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
     volumes:
       - ./backend-php:/var/www
     depends_on:
       - mysql
-      - redis
 
   frontend:
     build:
       context: ./frontend-react
       dockerfile: Dockerfile
     ports:
-      - "3000:80"
+      - "3000:3000"
     depends_on:
       - backend
 
@@ -35,11 +32,22 @@ services:
     image: mysql:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=challenge_db
+      - MYSQL_DATABASE=abstract_factory
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+
+  postgresql:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=abstract_factory
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
 
   redis:
     image: redis:alpine
@@ -48,6 +56,18 @@ services:
     volumes:
       - redis_data:/data
 
+  mongodb:
+    image: mongo:4.4
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
 volumes:
   mysql_data:
+  postgresql_data:
   redis_data:
+  mongodb_data:

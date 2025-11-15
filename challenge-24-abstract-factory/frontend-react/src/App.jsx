@@ -1,57 +1,61 @@
-import React, { useState, useEffect } from 'react'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
+import AbstractFactoryDemo from './components/AbstractFactoryDemo';
+import DatabaseSelector from './components/DatabaseSelector';
+import QueryExecutor from './components/QueryExecutor';
+import FlowchartVisualizer from './components/FlowchartVisualizer';
+import AuthWidget from './components/AuthWidget';
 
 function App() {
-  const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-
-  useEffect(() => {
-    fetchUsers()
-  }, [])
-
-  const fetchUsers = async () => {
-    setLoading(true)
-    setError(null)
-    try {
-      // In a real application, this would be your API endpoint
-      const response = await fetch('/api/users')
-      if (!response.ok) {
-        throw new Error('Failed to fetch users')
-      }
-      const data = await response.json()
-      setUsers(data.data || [])
-    } catch (err) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
-    }
-  }
+  const [activeTab, setActiveTab] = useState('demo');
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>PHP Challenge - React Frontend</h1>
-      </header>
-      <main>
-        <section>
-          <h2>Users</h2>
-          {loading && <p>Loading...</p>}
-          {error && <p className="error">Error: {error}</p>}
-          <ul>
-            {users.map(user => (
-              <li key={user.id}>
-                {user.name} ({user.email})
-              </li>
-            ))}
-          </ul>
-          <button onClick={fetchUsers} disabled={loading}>
-            Refresh Users
+        <h1>Challenge 24: Abstract Factory Pattern</h1>
+        <nav className="main-nav">
+          <button 
+            className={activeTab === 'demo' ? 'active' : ''}
+            onClick={() => setActiveTab('demo')}
+          >
+            Factory Demo
           </button>
-        </section>
+          <button 
+            className={activeTab === 'selector' ? 'active' : ''}
+            onClick={() => setActiveTab('selector')}
+          >
+            Database Selector
+          </button>
+          <button 
+            className={activeTab === 'query' ? 'active' : ''}
+            onClick={() => setActiveTab('query')}
+          >
+            Query Executor
+          </button>
+          <button 
+            className={activeTab === 'flowchart' ? 'active' : ''}
+            onClick={() => setActiveTab('flowchart')}
+          >
+            Flowchart
+          </button>
+          <button 
+            className={activeTab === 'auth' ? 'active' : ''}
+            onClick={() => setActiveTab('auth')}
+          >
+            Auth
+          </button>
+        </nav>
+      </header>
+      
+      <main className="App-main">
+        {activeTab === 'demo' && <AbstractFactoryDemo />}
+        {activeTab === 'selector' && <DatabaseSelector />}
+        {activeTab === 'query' && <QueryExecutor />}
+        {activeTab === 'flowchart' && <FlowchartVisualizer />}
+        {activeTab === 'auth' && <AuthWidget />}
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

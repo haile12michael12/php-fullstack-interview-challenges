@@ -8,6 +8,7 @@ use SharedBackend\Auth\TokenManager;
 use SharedBackend\Storage\FileStorage;
 use SharedBackend\Storage\StorageInterface;
 use App\Controller\ApiController;
+use App\Controller\ValueObjectsController;
 use App\Controller\ControllerResolver;
 
 return [
@@ -49,6 +50,10 @@ return [
     // Controllers
     ApiController::class => function($container) {
         return new ApiController();
+    },
+    
+    ValueObjectsController::class => function($container) {
+        return new ValueObjectsController();
     },
     
     ControllerResolver::class => function($container) {

@@ -1,0 +1,88 @@
+name: Integration Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  integration-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: abstract_factory
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      postgresql:
+        image: postgres:13
+        env:
+          POSTGRES_DB: abstract_factory
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: secret
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+
+      mongodb:
+        image: mongo:4.4
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: secret
+        ports:
+          - 27017:27017
+        options: --health-cmd mongo --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, xml, ctype, iconv, mysql, pdo, pdo_mysql, pdo_pgsql, pgsql, redis
+        coverage: none
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend-react/package-lock.json
+
+    - name: Install PHP dependencies
+      run: |
+        cd backend-php
+        composer install --no-interaction --prefer-dist
+
+    - name: Install Node.js dependencies
+      run: |
+        cd frontend-react
+        npm ci
+
+    - name: Start backend server
+      run: |
+        cd backend-php
+        php -S localhost:8000 -t public &
+
+    - name: Wait for backend to start
+      run: |
+        sleep 10
+
+    - name: Run integration tests
+      run: |
+        cd backend-php
+        composer test

@@ -59,7 +59,7 @@ return [
         'database' => 1,
     ],
     
-    'routes' => [
+    'routes' => array_merge([
         // Default routes will be defined in challenge-specific files
-    ],
+    ], require __DIR__ . '/routes.php'),
 ];

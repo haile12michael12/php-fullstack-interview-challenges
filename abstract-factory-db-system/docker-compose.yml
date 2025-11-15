@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # PHP Backend
+  php:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=abstract_factory
+      - DB_USER=root
+      - DB_PASSWORD=root
+    depends_on:
+      - mysql
+      - postgres
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=abstract_factory
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=abstract_factory
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - php
+
+volumes:
+  mysql_data:
+  postgres_data:

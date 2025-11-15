@@ -1,0 +1,63 @@
+name: PHP Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  php-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: abstract_factory
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      postgresql:
+        image: postgres:13
+        env:
+          POSTGRES_DB: abstract_factory
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: secret
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+      redis:
+        image: redis:alpine
+        ports:
+          - 6379:6379
+        options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, xml, ctype, iconv, mysql, pdo, pdo_mysql, pdo_pgsql, pgsql, redis
+        coverage: none
+
+    - name: Install dependencies
+      run: |
+        cd backend-php
+        composer install --no-interaction --prefer-dist
+
+    - name: Run PHPStan
+      run: |
+        cd backend-php
+        composer phpstan
+
+    - name: Run PHPUnit tests
+      run: |
+        cd backend-php
+        composer test
